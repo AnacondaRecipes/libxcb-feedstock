@@ -20,11 +20,12 @@ source:
 # versions to cover the different Visual Studio versions.
 
 build:
-  number: 0
+  number: 2
   detect_binary_files_with_prefix: true
 
 requirements:
   build:
+    - {{ compiler('c') }}
     - m2-autoconf  # [win]
     - m2-automake{{ am_version }}  # [win]
     - m2-libtool  # [win]
@@ -32,7 +33,10 @@ requirements:
     - m2w64-toolchain  # [win]
     - pkg-config  # [not win]
     - posix  # [win]
-    - toolchain
+    - python
+    - vc 9  # [win and py27]
+    - vc 10  # [win and py34]
+    - vc 14  # [win and py>=35]
     - pthread-stubs
     - xorg-libxau
     - xorg-libxdmcp
