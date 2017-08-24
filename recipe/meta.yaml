@@ -37,15 +37,12 @@ requirements:
     - vc 9  # [win and py27]
     - vc 10  # [win and py34]
     - vc 14  # [win and py>=35]
+    - xcb-proto
     - pthread-stubs
-    - xorg-libxau
-    - xorg-libxdmcp
-    - xorg-util-macros
-    - xcb-proto >=1.13
-    - xorg-xproto
-  run:
-    - xorg-libxau
-    - xorg-libxdmcp
+    - {{ cdt('xorg-x11-proto-devel') }}
+    - {{ cdt('xorg-x11-util-macros') }}
+    - {{ cdt('libx11-devel') }}
+    - {{ cdt('libxau-devel') }}
 
 test:
   commands:
