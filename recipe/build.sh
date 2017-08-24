@@ -34,16 +34,20 @@ if [ -n "$VS_MAJOR" ] ; then
     autoreconf "${autoreconf_args[@]}"
 fi
 
-export PKG_CONFIG_LIBDIR=$uprefix/lib/pkgconfig:$uprefix/share/pkgconfig
-configure_args=(
-    --prefix=$mprefix
-    --disable-dependency-tracking
-    --disable-selective-werror
-    --disable-silent-rules
-)
+echo "#!/usr/bin/env bash"                                > ./pkg-config
+echo "${PREFIX}/bin/pkg-config --define-prefix \"\$@\""  >> ./pkg-config
+chmod +x ./pkg-config
+export PKG_CONFIG=${PWD}/pkg-config
+export PKG_CONFIG_PATH=$(${CC} -print-sysroot)/usr/share/pkgconfig:$(${CC} -print-sysroot)/usr/lib64/pkgconfig:$uprefix/lib/pkgconfig:$uprefix/share/pkgconfig
+declare -a configure_args
+configure_args+=(--prefix=$mprefix)
+configure_args+=(--host=${HOST})
+configure_args+=(--disable-dependency-tracking)
+configure_args+=(--disable-selective-werror)
+configure_args+=(--disable-silent-rules)
 
 ./configure "${configure_args[@]}"
-make -j$CPU_COUNT
+make -j ${CPU_COUNT}
 make install
 make check
 
@@ -80,3 +84,6 @@ if [ -z "VS_MAJOR" ] ; then
         rm -f $uprefix/lib/lib${lib_ident}.la $uprefix/lib/lib${lib_ident}.a
     done
 fi
+
+# TODO :: Remove the commit that adds the pkg-config wrapper then use this as a testcase for getting pyldd integrated into conda-build to find problems.
+nm ${PREFIX}/lib/libxcb.so.1.1.0 | grep memcpy
