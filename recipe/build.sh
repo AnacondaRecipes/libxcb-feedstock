@@ -47,7 +47,7 @@ configure_args+=(--disable-selective-werror)
 configure_args+=(--disable-silent-rules)
 
 ./configure "${configure_args[@]}"
-make -j ${CPU_COUNT}
+make -j ${CPU_COUNT} ${VERBOSE_AT}
 make install
 make check
 
