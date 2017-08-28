@@ -21,6 +21,7 @@ source:
 # versions to cover the different Visual Studio versions.
 
 build:
+  skip: True  # [osx]
   number: 2
   detect_binary_files_with_prefix: true
   features:
@@ -31,6 +32,10 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
+    - {{ cdt('xorg-x11-util-macros') }}  # [linux]
+    - {{ cdt('libx11-devel') }}          # [linux]
+    - {{ cdt('libxau-devel') }}          # [linux]
     - m2-autoconf  # [win]
     - m2-automake{{ am_version }}  # [win]
     - m2-libtool  # [win]
@@ -44,10 +49,6 @@ requirements:
     - vc 14  # [win and py>=35]
     - xcb-proto
     - pthread-stubs
-    - {{ cdt('xorg-x11-proto-devel') }}
-    - {{ cdt('xorg-x11-util-macros') }}
-    - {{ cdt('libx11-devel') }}
-    - {{ cdt('libxau-devel') }}
     # - xorg-libxau
     # - xorg-libxdmcp
     # - xorg-util-macros
