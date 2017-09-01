@@ -17,9 +17,6 @@ source:
     - python3.patch
     - windows.patch  # [win]
 
-# NOTE: Python isn't a runtime dependency, but we need to matrix across Python
-# versions to cover the different Visual Studio versions.
-
 build:
   skip: True  # [osx]
   number: 2
@@ -43,7 +40,6 @@ requirements:
     - m2w64-toolchain  # [win]
     - pkg-config  # [not win]
     - posix  # [win]
-    - python
     - vc 9  # [win and py27]
     - vc 10  # [win and py34]
     - vc 14  # [win and py>=35]
