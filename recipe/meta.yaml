@@ -10,7 +10,6 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ xorg_name }}-{{ version }}.tar.bz2
   url: https://www.x.org/releases/individual/{{ xorg_category }}/{{ xorg_name }}-{{ version }}.tar.bz2
   sha256: {{ sha256 }}
   patches:
@@ -19,12 +18,13 @@ source:
 
 build:
   skip: True  # [osx]
-  number: 2
-  detect_binary_files_with_prefix: true
+  number: 3
   features:
-    - vc9  # [win and py27]
-    - vc10  # [win and py34]
-    - vc14  # [win and py>=35]
+    - vc{{ vc }}  # [win]
+  run_exports:
+    #  Excellent: only new symbols
+    #   https://abi-laboratory.pro/tracker/timeline/libxcb/
+    - {{ pin_subpackage('libxcb') }}
 
 requirements:
   build:
@@ -40,9 +40,6 @@ requirements:
     - m2w64-toolchain  # [win]
     - pkg-config  # [not win]
     - posix  # [win]
-    - vc 9  # [win and py27]
-    - vc 10  # [win and py34]
-    - vc 14  # [win and py>=35]
     - xcb-proto
     - pthread-stubs
     # - xorg-libxau
@@ -50,10 +47,7 @@ requirements:
     # - xorg-util-macros
     # - xorg-xproto
 
-  run:
-    - vc 9  # [win and py27]
-    - vc 10  # [win and py34]
-    - vc 14  # [win and py>=35]
+  # run:
     # - xorg-libxau
     # - xorg-libxdmcp
 
