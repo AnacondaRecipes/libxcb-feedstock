@@ -18,9 +18,7 @@ source:
 
 build:
   skip: True  # [osx]
-  number: 3
-  features:
-    - vc{{ vc }}  # [win]
+  number: 4
   run_exports:
     #  Excellent: only new symbols
     #   https://abi-laboratory.pro/tracker/timeline/libxcb/
