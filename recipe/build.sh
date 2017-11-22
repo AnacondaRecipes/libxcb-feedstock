@@ -10,14 +10,26 @@ IFS=$' \t\n' # workaround for conda 4.2.13+toolchain bug
 # (/c/Conda) forms, but Unix form is often "/" which can cause problems.
 if [ -n "$LIBRARY_PREFIX_M" ] ; then
     mprefix="$LIBRARY_PREFIX_M"
+    if [ "$ARCH" = "32" ]; then
+        bprefix="${mprefix/h_env/build_env}"
+    else
+        bprefix=$mprefix
+    fi
     if [ "$LIBRARY_PREFIX_U" = / ] ; then
         uprefix=""
     else
         uprefix="$LIBRARY_PREFIX_U"
     fi
+    if [ "$ARCH" = "32" ]; then
+        ubprefix="${uprefix/h_env/build_env}"
+    else
+        ubprefix=$uprefix
+    fi
 else
     mprefix="$PREFIX"
+    bprefix="$PREFIX"
     uprefix="$PREFIX"
+    ubprefix="$PREFIX"
 fi
 
 # On Windows we need to regenerate the configure scripts.
@@ -28,19 +40,19 @@ if [ -n "$VS_MAJOR" ] ; then
     autoreconf_args=(
         --force
         --install
-        -I "$mprefix/share/aclocal"
-        -I "$mprefix/mingw-w64/share/aclocal" # note: this is correct for win32 also!
+        -I "$ubprefix/share/aclocal"
+        -I "$ubprefix/mingw-w64/share/aclocal" # note: this is correct for win32 also!
     )
     autoreconf "${autoreconf_args[@]}"
 fi
 
 echo "#!/usr/bin/env bash"                                > ./pkg-config
-echo "${PREFIX}/bin/pkg-config --define-prefix \"\$@\""  >> ./pkg-config
+echo "${ubprefix}/bin/pkg-config --define-prefix \"\$@\""  >> ./pkg-config
 chmod +x ./pkg-config
 export PKG_CONFIG=${PWD}/pkg-config
-export PKG_CONFIG_PATH=$(${CC} -print-sysroot)/usr/share/pkgconfig:$(${CC} -print-sysroot)/usr/lib64/pkgconfig:$uprefix/lib/pkgconfig:$uprefix/share/pkgconfig
+export PKG_CONFIG_PATH=$(${CC} -print-sysroot)/usr/share/pkgconfig:$(${CC} -print-sysroot)/usr/lib64/pkgconfig:$ubprefix/lib/pkgconfig:$ubprefix/share/pkgconfig
 declare -a configure_args
-configure_args+=(--prefix=$mprefix)
+configure_args+=(--prefix=$uprefix)
 configure_args+=(--host=${HOST})
 configure_args+=(--disable-dependency-tracking)
 configure_args+=(--disable-selective-werror)
