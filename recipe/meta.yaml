@@ -26,7 +26,7 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - {{ compiler('c') }}                # [not win]
     - {{ cdt('xorg-x11-proto-devel') }}  # [linux]
     - {{ cdt('xorg-x11-util-macros') }}  # [linux]
     - {{ cdt('libx11-devel') }}          # [linux]
@@ -38,12 +38,14 @@ requirements:
     - m2w64-toolchain  # [win]
     - pkg-config  # [not win]
     - posix  # [win]
-    - xcb-proto
-    - pthread-stubs
     # - xorg-libxau
     # - xorg-libxdmcp
-    # - xorg-util-macros
+    - xorg-util-macros  # [win]
     # - xorg-xproto
+  host:
+    - xcb-proto
+    - pthread-stubs
+
 
   # run:
     # - xorg-libxau
