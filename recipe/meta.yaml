@@ -17,6 +17,7 @@ source:
     patches:
       - python3.patch
       - windows.patch  # [win]
+      - 0001-Re-introduce-_xcb_lock_io-for-SLES11.patch
   - url: https://www.x.org/releases/individual/{{ xorg_category }}/{{ xorg_proto_name }}-{{ version }}.tar.bz2
     sha256: {{ proto_sha256 }}
     folder: proto
@@ -25,7 +26,7 @@ source:
 
 build:
   skip: True  # [osx]
-  number: 0
+  number: 1
 
 outputs:
   - name: libxcb
@@ -56,10 +57,6 @@ outputs:
         - pthread-stubs
     about:
       summary: "This is the C-language Binding (XCB) package to the X Window System protocol"
-    test:
-      commands:
-        - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-        - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
 
   - name: xcb-proto
     script: install_proto.sh
@@ -80,9 +77,6 @@ outputs:
     test:
       imports:
         - xcbgen
-      commands:
-        - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-        - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
     about:
       summary: "Provides the XML-XCB protocol descriptions that libxcb uses to generate the majority of its code and API"
 

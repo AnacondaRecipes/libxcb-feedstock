@@ -46,11 +46,6 @@ if [ -n "$VS_MAJOR" ] ; then
     autoreconf "${autoreconf_args[@]}"
 fi
 
-echo "#!/usr/bin/env bash"                                > ./pkg-config
-echo "${ubprefix}/bin/pkg-config --define-prefix \"\$@\""  >> ./pkg-config
-chmod +x ./pkg-config
-export PKG_CONFIG=${PWD}/pkg-config
-export PKG_CONFIG_PATH=$(${CC} -print-sysroot)/usr/share/pkgconfig:$(${CC} -print-sysroot)/usr/lib64/pkgconfig:$ubprefix/lib/pkgconfig:$ubprefix/share/pkgconfig
 declare -a configure_args
 configure_args+=(--prefix=$uprefix)
 configure_args+=(--host=${HOST})
@@ -96,6 +91,3 @@ if [ -z "VS_MAJOR" ] ; then
         rm -f $uprefix/lib/lib${lib_ident}.la $uprefix/lib/lib${lib_ident}.a
     done
 fi
-
-# TODO :: Remove the commit that adds the pkg-config wrapper then use this as a testcase for getting pyldd integrated into conda-build to find problems.
-nm ${PREFIX}/lib/libxcb.so.1.1.0 | grep memcpy
