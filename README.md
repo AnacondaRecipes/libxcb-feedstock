@@ -1,41 +1,44 @@
-About libxcb
-============
+About libxcb_and_xcb-proto
+==========================
 
-Home: http://xcb.freedesktop.org/
+Home: 
 
-Package license: MIT
+Package license: 
 
 Feedstock license: BSD 3-Clause
 
-Summary: This is the C-language Binding (XCB) package to the X Window System protocol
+Summary: Provides the XML-XCB protocol descriptions that libxcb uses to generate the majority of its code and API
 
 
 
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/libxcb-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/libxcb-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/libxcb-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/libxcb-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/libxcb-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/libxcb-feedstock/branch/master)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/libxcb-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/libxcb-feedstock)
+[![Windows](https://img.shields.io/appveyor/ci/conda-forge/libxcb-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/libxcb-feedstock/branch/master)
+![OSX disabled](https://img.shields.io/badge/OSX-disabled-lightgrey.svg)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/libxcb/badges/version.svg)](https://anaconda.org/conda-forge/libxcb)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/libxcb/badges/downloads.svg)](https://anaconda.org/conda-forge/libxcb)
 
-Installing libxcb
-=================
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-libxcb-green.svg)](https://anaconda.org/conda-forge/libxcb) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/libxcb.svg)](https://anaconda.org/conda-forge/libxcb) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/libxcb.svg)](https://anaconda.org/conda-forge/libxcb) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/libxcb.svg)](https://anaconda.org/conda-forge/libxcb) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-xcb--proto-green.svg)](https://anaconda.org/conda-forge/xcb-proto) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/xcb-proto.svg)](https://anaconda.org/conda-forge/xcb-proto) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/xcb-proto.svg)](https://anaconda.org/conda-forge/xcb-proto) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/xcb-proto.svg)](https://anaconda.org/conda-forge/xcb-proto) |
 
-Installing `libxcb` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing libxcb_and_xcb-proto
+===============================
+
+Installing `libxcb_and_xcb-proto` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `libxcb` can be installed with:
+Once the `conda-forge` channel has been enabled, `libxcb, xcb-proto` can be installed with:
 
 ```
-conda install libxcb
+conda install libxcb xcb-proto
 ```
 
 It is possible to list all of the versions of `libxcb` available on your platform with:
@@ -81,17 +84,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating libxcb-feedstock
-=========================
+Updating libxcb_and_xcb-proto-feedstock
+=======================================
 
-If you would like to improve the libxcb recipe or build a new
+If you would like to improve the libxcb_and_xcb-proto recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/libxcb-feedstock are
+Note that all branches in the conda-forge/libxcb_and_xcb-proto-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
