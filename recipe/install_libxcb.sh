@@ -46,6 +46,14 @@ if [ -n "$VS_MAJOR" ] ; then
     autoreconf "${autoreconf_args[@]}"
 fi
 
+export PKG_CONFIG_LIBDIR="${PREFIX}/lib/pkgconfig:${PREFIX}/share/pkgconfig:${PREFIX/h_env/build_env}/lib/pkgconfig:${PREFIX/h_env/build_env}/share/pkgconfig"
+
+if [ `uname -s` = Linux ]; then
+    # Needed to find CDT X11 libraries
+    sysroot=$(cd "`${CC} --print-sysroot`" && pwd)
+    export PKG_CONFIG_PATH="${sysroot}/usr/share/pkgconfig:${sysroot}/usr/lib64/pkgconfig:${sysroot}/usr/lib/pkgconfig"
+fi
+
 declare -a configure_args
 configure_args+=(--prefix=$uprefix)
 configure_args+=(--host=${HOST})

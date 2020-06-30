@@ -47,6 +47,13 @@ if [ -n "$VS_MAJOR" ] ; then
 fi
 
 export PKG_CONFIG_LIBDIR=$uprefix/lib/pkgconfig:$uprefix/share/pkgconfig:${uprefix/h_env/build_env}/lib/pkgconfig:${uprefix/h_env/build_env}/share/pkgconfig
+
+if [ `uname -s` = Linux ]; then
+    # Needed to find CDT X11 libraries
+    sysroot=$(cd "`${CC} --print-sysroot`" && pwd)
+    export PKG_CONFIG_LIBDIR="${PKG_CONFIG_LIBDIR}:${sysroot_pkgconf}/usr/share/pkgconfig"
+fi
+
 configure_args=(
     --prefix=$uprefix
     --disable-dependency-tracking
