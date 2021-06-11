@@ -71,10 +71,11 @@ outputs:
         - posix                              # [win]
         - pkg-config                         # [not win]
         - make                               # [not win]
+        - python
       host:
-        - python {{ python }}
+        - python
       run:
-        - python {{ python }}
+        - python
     test:
       imports:
         - xcbgen
