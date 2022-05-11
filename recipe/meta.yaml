@@ -34,6 +34,8 @@ outputs:
         #  Excellent: only new symbols
         #   https://abi-laboratory.pro/tracker/timeline/libxcb/
         - {{ pin_subpackage('libxcb') }}
+      missing_dso_whitelist:                 # [linux]
+        - $RPATH/libc.so.6                   # [linux]
     requirements:
       build:
         - {{ compiler('c') }}                # [not win]
