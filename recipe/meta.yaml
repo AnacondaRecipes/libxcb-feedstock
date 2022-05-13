@@ -1,10 +1,4 @@
-{% set xorg_name = "libxcb" %}
-{% set xorg_category = "xcb" %}
-{% set name = "libxcb" %}
-{% set version = "1.14" %}
-{% set libxcb_sha256 = "a55ed6db98d43469801262d81dc2572ed124edc3db31059d4e9916eb9f844c34" %}
-{% set xorg_proto_name = "xcb-proto" %}
-{% set proto_sha256 = "186a3ceb26f9b4a015f5a44dcc814c93033a5fc39684f36f1ecc79834416a605" %}
+{% set version = "1.15" %}
 {% set am_version = "1.15" %} # keep synchronized with build.sh
 
 package:
@@ -12,13 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://www.x.org/releases/individual/{{ xorg_category }}/{{ xorg_name }}-{{ version }}.tar.xz
-    sha256: {{ libxcb_sha256 }}
+  - url: https://xcb.freedesktop.org/dist/libxcb-{{ version }}.tar.gz
+    sha256: 1cb65df8543a69ec0555ac696123ee386321dfac1964a3da39976c9a05ad724d
     patches:
       - windows.patch  # [win]
       - 0001-Re-introduce-_xcb_lock_io-for-SLES11.patch
-  - url: https://www.x.org/releases/individual/{{ xorg_category }}/{{ xorg_proto_name }}-{{ version }}.tar.xz
-    sha256: {{ proto_sha256 }}
+  - url: https://xcb.freedesktop.org/dist/xcb-proto-{{ version }}.tar.xz
+    sha256: d34c3b264e8365d16fa9db49179cfa3e9952baaf9275badda0f413966b65955f
     folder: proto
     patches:
       - windows-pythondir.patch  # [win]
@@ -40,6 +34,8 @@ outputs:
         #  Excellent: only new symbols
         #   https://abi-laboratory.pro/tracker/timeline/libxcb/
         - {{ pin_subpackage('libxcb') }}
+      missing_dso_whitelist:                 # [linux]
+        - $RPATH/libc.so.6                   # [linux]
     requirements:
       build:
         - {{ compiler('c') }}                # [not win]
@@ -88,10 +84,12 @@ outputs:
       summary: "Provides the XML-XCB protocol descriptions that libxcb uses to generate the majority of its code and API"
 
 about:
-  home: http://xcb.freedesktop.org/
+  home: https://xcb.freedesktop.org/
   license: MIT
   license_family: MIT
   license_file: COPYING
+  dev_url: https://gitlab.freedesktop.org/xorg/lib/libxcb
+  doc_url: https://xcb.freedesktop.org/XcbApi/
 
 extra:
   recipe-maintainers:
