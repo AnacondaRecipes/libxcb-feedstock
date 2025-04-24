@@ -19,13 +19,13 @@ source:
 
 build:
   skip: True  # [not linux]
-  number: 0
+  number: 1
 
 requirements:
   build:
     - patch       # [not win]
     - m2-patch    # [win]
- 
+
 outputs:
   - name: libxcb
     script: install_libxcb.sh
