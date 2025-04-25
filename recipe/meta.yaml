@@ -55,6 +55,9 @@ outputs:
       host:
         - {{ pin_subpackage('xcb-proto', exact=True) }}
         - pthread-stubs
+        - python
+      run:
+        - python
     about:
       summary: "This is the C-language Binding (XCB) package to the X Window System protocol"
 
