@@ -53,7 +53,7 @@ outputs:
         - pkg-config                         # [not win]
         - make                               # [not win]
       host:
-        - {{ pin_subpackage('xcb-proto') }}
+        - {{ pin_subpackage('xcb-proto', exact=True) }}
         - pthread-stubs
     about:
       summary: "This is the C-language Binding (XCB) package to the X Window System protocol"
