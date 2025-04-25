@@ -1,6 +1,8 @@
---- configure.ac.orig	2017-02-04 11:31:11.949794798 -0500
-+++ configure.ac	2017-02-04 11:31:27.726870712 -0500
-@@ -136,7 +136,7 @@
+diff --git a/configure.ac b/configure.ac
+index 4e6f028..031a3bd 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -140,7 +140,7 @@ esac
  have_win32="no"
  lt_enable_auto_import=""
  case $host_os in
@@ -9,7 +11,7 @@
          have_win32="yes"
          lt_enable_auto_import="-Wl,--enable-auto-import"
          ;;
-@@ -208,7 +208,7 @@
+@@ -212,7 +212,7 @@ esac
  
  dnl Link with winsock for socket functions on MinGW
  case $host_os in
@@ -18,7 +20,7 @@
                  AC_CHECK_LIB([ws2_32],[main])
                  ;;
          *)
-@@ -256,16 +256,14 @@
+@@ -252,16 +252,14 @@ AC_ARG_WITH(serverside-support, AS_HELP_STRING([--with-serverside-support], [Bui
  
  AM_CONDITIONAL(XCB_SERVERSIDE_SUPPORT, test "x$XCB_SERVERSIDE_SUPPORT" = "xyes")
  
@@ -36,8 +38,8 @@
 +AC_CONFIG_FILES([xcb.pc
  xcb-composite.pc
  xcb-damage.pc
- xcb-dpms.pc
-@@ -294,8 +292,7 @@
+ xcb-dbe.pc
+@@ -292,8 +290,7 @@ xcb-xv.pc
  xcb-xvmc.pc
  ])
  
@@ -47,3 +49,4 @@
  ])
  
  AC_OUTPUT
+ 
