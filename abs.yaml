@@ -3,3 +3,4 @@ channels:
   - https://staging.continuum.io/prefect/fs/xorg-xorgproto-feedstock/pr1/1a9e774
   - https://staging.continuum.io/prefect/fs/xorg-libxau-feedstock/pr1/1de3d48
   - https://staging.continuum.io/prefect/fs/xorg-libxdmcp-feedstock/pr1/0d454f7
+  - https://staging.continuum.io/prefect/fs/xcb-proto-feedstock/pr2/eb054f3
