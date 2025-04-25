@@ -72,7 +72,7 @@ outputs:
         - posix                              # [win]
         - pkg-config                         # [not win]
         - make                               # [not win]
-        - python
+        - python 3.9
       host:
         - python
       run:
