@@ -23,7 +23,6 @@ fi
 
 # On Windows we need to regenerate the configure scripts.
 if [ -n "$CYGWIN_PREFIX" ] ; then
-    am_version=1.15 # keep sync'ed with meta.yaml
     export ACLOCAL=aclocal-$am_version
     export AUTOMAKE=automake-$am_version
     autoreconf_args=(
@@ -36,21 +35,24 @@ if [ -n "$CYGWIN_PREFIX" ] ; then
 
     # And we need to add the search path that lets libtool find the
     # msys2 stub libraries for ws2_32.
-    # Find Windows libraries in a more reliable way
-    for potential_lib in "$BUILD_PREFIX_M/Library/mingw-w64/lib" "$mprefix/mingw-w64/lib" "$mprefix/lib/gcc/x86_64-w64-mingw32/"*; do
-        if [ -e "$potential_lib/libws2_32.a" ]; then
-            platlibs=$(cygpath -w "$potential_lib")
-            echo "Found libws2_32.a at: $platlibs"
-            export LDFLAGS="$LDFLAGS -L$platlibs"
+    # Find MSYS2 libraries directory using a more reliable approach
+    platlibs=""
+    for potential_path in \
+        "$(dirname $($CC --print-prog-name=ld))/../sysroot/usr/lib" \
+        "$(dirname $($CC --print-prog-name=ld))/../x86_64-w64-mingw32/lib" \
+        "$BUILD_PREFIX_M/Library/mingw-w64/lib" \
+        "$BUILD_PREFIX_M/Library/usr/lib" \
+        "$BUILD_PREFIX_M/Library/x86_64-w64-mingw32/sysroot/usr/lib"; do
+        if [ -f "$(cygpath -u "$potential_path")/libws2_32.a" ]; then
+            platlibs=$(cygpath -u "$potential_path")
             break
         fi
     done
-    
-    if [ -z "$platlibs" ]; then
-        echo "Warning: Could not locate libws2_32.a, using default path"
-        default_path="$BUILD_PREFIX_M/Library/mingw-w64/lib"
-        platlibs=$(cygpath -w "$default_path")
+
+    if [ -f "$platlibs/libws2_32.a" ]; then
         export LDFLAGS="$LDFLAGS -L$platlibs"
+    else
+        echo "Warning: Could not find libws2_32.a"
     fi
     export DLLTOOL=x86_64-w64-mingw32-dlltool.exe
     export NM=x86_64-w64-mingw32-nm.exe

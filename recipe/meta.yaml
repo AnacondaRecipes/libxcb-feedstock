@@ -3,7 +3,6 @@
 {% set name = "libxcb" %}
 {% set version = "1.17.0" %}
 {% set sha256 = "2c69287424c9e2128cb47ffe92171e10417041ec2963bceafb65cb3fcf8f0b85" %}
-{% set am_version = "1.15" %} # keep synchronized with build.sh
 
 package:
   name: {{ name|lower }}
@@ -83,7 +82,9 @@ test:
     {% endfor %}
 
 about:
-  home: http://xcb.freedesktop.org/
+  home: https://xcb.freedesktop.org/
+  dev_url: https://gitlab.freedesktop.org/xorg/lib/libxcb
+  doc_url: https://xcb.freedesktop.org/XcbApi/
   license: MIT
   license_family: MIT
   license_file: COPYING
