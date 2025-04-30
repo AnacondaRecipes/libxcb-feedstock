@@ -84,23 +84,10 @@ test:
     - test -f $PREFIX/lib/lib{{ lib_ident }}.so  # [linux]
     {% endfor %}
 
-  # Check downstream packages: 
+  # Check downstream packages (if needed): 
   # gst-plugins-base, cairo, libxkbcommon, freeglut, qtbase, qtwebengine, 
   # nsight-compute, xcb-util-cursor, qt-webengine, pyside6, r-cairo, r-tkrplot, r-gdtools
-  downstreams:
-  #  - gst-plugins-base
-  #  - cairo
-  #  - libxkbcommon
-  #  - freeglut
-  #  - qtbase
-  #  - qtwebengine 
-  #  - nsight-compute
-  #  - xcb-util-cursor
-  #  - qt-webengine  # failed
-    - pyside6
-    - r-cairo    # [linux]
-    - r-tkrplot  # [linux]
-    - r-gdtools  # [linux]
+
 
 about:
   home: https://xcb.freedesktop.org/
