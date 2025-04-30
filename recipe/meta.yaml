@@ -86,12 +86,12 @@ test:
   # gst-plugins-base, cairo, libxkbcommon, freeglut, qtbase, qtwebengine, 
   # nsight-compute, xcb-util-cursor, qt-webengine, pyside6, r-cairo, r-tkrplot, r-gdtools
   downstreams:
-   - gst-plugins-base
-   - cairo
-   - libxkbcommon
-   - freeglut
-   - qtbase
-   - qtwebengine, 
+  #  - gst-plugins-base
+  #  - cairo
+  #  - libxkbcommon
+  #  - freeglut
+  #  - qtbase
+   - qtwebengine 
    - nsight-compute
    - xcb-util-cursor
    - qt-webengine
