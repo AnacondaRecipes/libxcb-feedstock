@@ -16,7 +16,8 @@ source:
 
 build:
   number: 0
-  skip: true  # []
+  # xorg-libxdmcp isn't available on Windows because its dependencies clash with m2/msys2 and mingw64/ucrt64 toolchains.
+  skip: true  # [win]
   detect_binary_files_with_prefix: true
   run_exports:
     - {{ pin_subpackage('libxcb', max_pin='x') }}
