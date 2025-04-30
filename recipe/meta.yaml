@@ -82,6 +82,24 @@ test:
     - test -f $PREFIX/lib/lib{{ lib_ident }}.so  # [linux]
     {% endfor %}
 
+  # Check downstream packages: 
+  # gst-plugins-base, cairo, libxkbcommon, freeglut, qtbase, qtwebengine, 
+  # nsight-compute, xcb-util-cursor, qt-webengine, pyside6, r-cairo, r-tkrplot, r-gdtools
+  downstreams:
+   - gst-plugins-base
+   - cairo
+   - libxkbcommon
+   - freeglut
+   - qtbase
+   - qtwebengine, 
+   - nsight-compute
+   - xcb-util-cursor
+   - qt-webengine
+   - pyside6
+   - r-cairo    # [linux]
+   - r-tkrplot  # [linux]
+   - r-gdtools  # [linux]
+
 about:
   home: https://xcb.freedesktop.org/
   dev_url: https://gitlab.freedesktop.org/xorg/lib/libxcb
