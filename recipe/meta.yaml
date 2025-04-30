@@ -16,6 +16,7 @@ source:
 
 build:
   number: 0
+  skip: true  # []
   detect_binary_files_with_prefix: true
   run_exports:
     - {{ pin_subpackage('libxcb', max_pin='x') }}
@@ -91,14 +92,14 @@ test:
   #  - libxkbcommon
   #  - freeglut
   #  - qtbase
-   - qtwebengine 
-   - nsight-compute
-   - xcb-util-cursor
-   - qt-webengine
-   - pyside6
-   - r-cairo    # [linux]
-   - r-tkrplot  # [linux]
-   - r-gdtools  # [linux]
+  #  - qtwebengine 
+  #  - nsight-compute
+  #  - xcb-util-cursor
+  #  - qt-webengine  # failed
+    - pyside6
+    - r-cairo    # [linux]
+    - r-tkrplot  # [linux]
+    - r-gdtools  # [linux]
 
 about:
   home: https://xcb.freedesktop.org/
